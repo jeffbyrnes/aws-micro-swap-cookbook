@@ -1,25 +1,29 @@
-aws-micro-swap Cookbook
-=======================
+# aws-micro-swap Cookbook
+
 This cookbook sets up and enables a swap on micro EC2 instances.
 
-Requirements
-------------
-Requires that the node be an EC2 instance of micro size. The recipe checks for this to be an EC2 node, and that the instance type is a micro type. Otherwise, nothing will execute.
+# Requirements
 
-Usage
------
-#### aws-micro-swap::default
-Just include `aws-micro-swap` in your node's `run_list`:
+Must be executed on a `t1.micro` EC2 instance. Otherwise, nothing will occur, as other instance types have swap set up already.
 
-```json
-{
-  "name": "my_node",
-  "run_list": [
-    "recipe[aws-micro-swap]"
-  ]
-}
-```
+# Usage
 
-Authors
--------------------
+Just include `aws-micro-swap::default` in your node’s `run_list`.
+
+# Attributes
+
+* `node['aws-micro-swap']['swap-path']`
+
+# Recipes
+
+## default
+
+1. Check if we’re on an `t1.micro` EC2 instance.
+2. Create the swapfile if it does not exist
+3. Set up the swapfile
+4. Enable the swap
+5. Add the swapfile to `/etc/fstab`
+
+# Authors
+
 Authors: Jeff Byrnes <thejeffbyrnes@gmail.com>

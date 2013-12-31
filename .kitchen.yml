@@ -1,0 +1,29 @@
+---
+driver:
+  name: ec2
+  require_chef_omnibus: true
+  flavor_id: t1.micro
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_JB'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_KEY_JB'] %>
+  aws_ssh_key_id: macbook-pro
+  groups: AWS-OpsWorks-Blank-Server
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  # Ubuntu 12.04 LTS precise64 EBS
+  - name: ubuntu-12.04
+    driver_config:
+      image_id: ami-0568456c
+      username: ubuntu
+  # Amazon Linux 2013.09 x86_64 PV EBS
+  - name: amazon-linux-2013.09-x64-ebs
+    driver_config:
+      image_id: ami-bba18dd2
+      username: ec2-user
+
+suites:
+  - name: default
+    run_list:
+      - recipe[aws-micro-swap::default]
