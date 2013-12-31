@@ -2,6 +2,8 @@
 
 This cookbook sets up and enables a swap on micro EC2 instances.
 
+After writing this whole cookbook, setting up tests, and getting this to v1.0.0, @sethvargo’s [swap cookbook](https://github.com/sethvargo-cookbooks/swap) was discovered, which provides all the functionality of this cookbook as a resouce.
+
 # Requirements
 
 Must be executed on a `t1.micro` EC2 instance. Otherwise, nothing will occur, as other instance types have swap set up already.
